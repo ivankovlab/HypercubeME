@@ -1,0 +1,2 @@
+diagonal first_genotype last_genotype
+A1Z:C0Z:T2Z	0C:1A:2T	0Z
