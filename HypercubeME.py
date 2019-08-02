@@ -29,7 +29,8 @@ def divide_genotype_list(num_genotypes: int, num_parts: int) -> list:
 
 
 def write_pairs(genotypes: list, start_index: int, chunk: int, output_file_name: str):
-    """Write pairs at distance 1 to 'output_file_name' file forming by 'chunk' genotypes from 'start_index'"""
+    """Write pairs at distance 1 to 'output_file_name' file forming by 'chunk'
+       genotypes from 'start_index'"""
     if start_index < 0 or chunk < 0:
         raise Exception("Both start index and number of lines in a chunk must be positive")
 
@@ -55,7 +56,8 @@ def write_pairs(genotypes: list, start_index: int, chunk: int, output_file_name:
 
 
 def make_division_of_hypercube_file(input_file_name: str) -> list:
-    """Generate division of the hypercube file into the chunks of parallel hypercubes"""
+    """Generate division of the hypercube file into the
+      chunks of parallel hypercubes"""
     with open(input_file_name, 'r') as fh:
         # Skip header
         fh.readline()
@@ -113,7 +115,8 @@ def print_division(division: list):
 
 
 def process_diagonal(diagonal: str, same_diag_start: list, same_diag_end: list) -> str:
-    """Take parallel hypercubes with the same 'diagonal', generate and return next-dimensional hypercubes."""
+    """Take parallel hypercubes with the same 'diagonal',
+       generate and return next-dimensional hypercubes."""
     diagonal_list = diagonal.split(':')
     lines: list = list()
     for i in range(len(same_diag_start) - 1):
@@ -129,7 +132,8 @@ def process_diagonal(diagonal: str, same_diag_start: list, same_diag_end: list) 
 
 
 def process_file_with_hypercubes(hypercube_file_name: str, position: int, chunk_length: int, output_file_name: str):
-    """Generate the next-dimensional hypercubes from 'hypercube_file_name' and write them into 'output_file_name'."""
+    """Generate the next-dimensional hypercubes from 'hypercube_file_name'
+       and write them into 'output_file_name'."""
     same_diag_start_list = list()
     same_diag_end_list = list()
     with open(hypercube_file_name, 'r') as fh:
@@ -203,7 +207,8 @@ def get_dimension(filename: str) -> int:
 
 
 def hypercube_file_name(dimension: int) -> str:
-    """Return the name of the file where hypercubes of the given 'dimension' are stored."""
+    """Return the name of the file where hypercubes
+       of the given 'dimension' are stored."""
     return 'hypercubes_' + str(dimension) + '.txt'
 
 

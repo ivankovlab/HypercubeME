@@ -22,11 +22,13 @@ def read_genotypes(filename: str) -> list:
 
 
 def get_delta(genotype1: str, genotype2: str) -> str:
-    """Returns difference between 'genotype1' and 'genotype2' as alphabetically ordered list of mutations."""
+    """Returns difference between 'genotype1' and 'genotype2' as
+       alphabetically ordered list of mutations."""
     s1 = set(genotype1)
     s2 = set(genotype2)
 
-    # Correction for wild-type: it is denoted as '0Z', 'Z' being wild-type amino acid
+    # Correction for wild-type: it is denoted as '0Z',
+    # 'Z' being wild-type amino acid
     if len(s1) == 1 and '0Z' in s1:
         s1 = set()
     if len(s2) == 1 and '0Z' in s2:
@@ -105,7 +107,8 @@ def mergeiter(*iterables, **kwargs):
 
 
 def sort_file(input_file_name: str, output_file_name: str):
-    """Sort lines from the input_file_name in alphabetic order and print them to the output_file_name."""
+    """Sort lines from the input_file_name in alphabetic order
+       and print them to the output_file_name."""
     with open(input_file_name, 'r') as fh:
         lines = fh.readlines()
 
@@ -116,7 +119,8 @@ def sort_file(input_file_name: str, output_file_name: str):
 
 
 def merge_sorted_files(sorted_file_names: list, max_open_files: int, output_file_name: str) -> bool:
-    """Merge files from 'sorted_file_names' and writes the content into 'output_file_name'."""
+    """Merge files from 'sorted_file_names' and writes the
+       content into 'output_file_name'."""
     if len(sorted_file_names) > max_open_files:
         num_parts = math.ceil(len(sorted_file_names) / max_open_files)
         num_files_in_part = math.ceil(len(sorted_file_names) / num_parts)
@@ -126,14 +130,16 @@ def merge_sorted_files(sorted_file_names: list, max_open_files: int, output_file
             start_index = num_files_in_part * i
             end_index = num_files_in_part * (i + 1)
             output_file_name_new = sorted_file_names[i] + "." + str(i)
-            f = merge_sorted_files(sorted_file_names[start_index:end_index], max_open_files, output_file_name_new)
-            if found == False:
+            f = merge_sorted_files(sorted_file_names[start_index:end_index],
+                                   max_open_files, output_file_name_new)
+            if not found:
                 found = f
             sorted_file_names_new.append(output_file_name_new)
-        if found == False:
+        if not found:
             return False
         else:
-            return merge_sorted_files(sorted_file_names_new, max_open_files, output_file_name)
+            return merge_sorted_files(sorted_file_names_new, max_open_files,
+                                      output_file_name)
     else:
         # Open *.sorted files into filehandle list to enable merging
         filehandles: list = list()
