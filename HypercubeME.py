@@ -7,7 +7,22 @@ import auxiliary as aux
 
 
 def divide_genotype_list(num_genotypes: int, num_parts: int) -> list:
-    """Divide 'num_genotypes' into 'num_parts' and return a list."""
+    """
+    Divide 'num_genotypes' into 'num_parts' and return a list.
+
+    Parameters
+    ----------
+        num_genotypes : int
+            The number of genotypes.
+        num_parts : int
+            The number of parts.
+
+    Returns
+    -------
+        division : list
+            The list of tuples containing the starting line of the file
+            and the number of lines of that chunk.
+    """
     if num_genotypes == 0 or num_parts == 0:
         return list()
 
@@ -29,8 +44,21 @@ def divide_genotype_list(num_genotypes: int, num_parts: int) -> list:
 
 
 def write_pairs(genotypes: list, start_index: int, chunk: int, output_file_name: str):
-    """Write pairs at distance 1 to 'output_file_name' file forming by 'chunk'
-       genotypes from 'start_index'"""
+    """
+    Write pairs at distance 1 to 'output_file_name' file forming by 'chunk'
+       genotypes from 'start_index'
+
+    Parameters
+    ----------
+        genotypes : list
+            List of the genotypes.
+        start_index : int
+            The index of the first genotype to use.
+        chunk : int
+            The size of the chunk.
+        output_file_name : str
+            Name of the file where the pairs will be printed.
+    """
     if start_index < 0 or chunk < 0:
         raise Exception("Both start index and number of lines in a chunk must be positive")
 
@@ -56,8 +84,23 @@ def write_pairs(genotypes: list, start_index: int, chunk: int, output_file_name:
 
 
 def make_division_of_hypercube_file(input_file_name: str) -> list:
-    """Generate division of the hypercube file into the
-      chunks of parallel hypercubes"""
+    """
+    Generate division of the hypercube file into the
+    chunks of parallel hypercubes.
+
+    Parameters
+    ----------
+        input_file_name : str
+            Name of the file containing the all the hypercubes.
+
+    Returns
+    -------
+        division : list
+            The division list. It is formed by triples.
+            The first element is line of the chunk start.
+            The second is the position (in lines) of the genotype in its chunk.
+            The third is the chunk start position.
+    """
     with open(input_file_name, 'r') as fh:
         # Skip header
         fh.readline()
@@ -175,7 +218,9 @@ def process_dimension_one(cores: int, input_file: str, working_dir: str) -> list
 
 
 def process_dimension(cores: int, hypercube_file_name: str, working_dir: str) -> list:
-    """Generate all hypercubes of dimension 'dim' from hypercubes of lower dimension 'dim-1'.
+    """
+    Generate all hypercubes of dimension 'dim' from
+    hypercubes of lower dimension 'dim-1'.
 
     The hypercubes of lower dimension are given in the file 'hypercube_{dim-1}.txt'.
 
