@@ -12,7 +12,7 @@ def read_genotypes(filename: str) -> list:
         filehandle.readline()
 
         for line in filehandle:
-            first = line.split('\t')[0]
+            first = line.split()[0]
             if first == '' or first == 'wt':
                 genotypes.append(('0Z',))
             else:
