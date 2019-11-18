@@ -2,7 +2,6 @@ import os
 import math
 import operator
 
-
 def read_genotypes(filename: str) -> list:
     """Read the genotypes from the 'filename' having header."""
     genotypes = list()
@@ -13,11 +12,11 @@ def read_genotypes(filename: str) -> list:
 
         for line in filehandle:
             first = line.split('\t')[0]
+            first = first.replace('\n', '')
             if first == '' or first == 'wt':
                 genotypes.append(('0Z',))
             else:
                 genotypes.append(tuple(first.split(':')))
-
     return genotypes
 
 
