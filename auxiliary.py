@@ -2,22 +2,6 @@ import os
 import math
 import operator
 
-def check_input(line: str, rownumber: int):
-    '''Checking input rows for valid format'''
-    amino_acids_list = ['G', 'A', 'V', 'L', 
-                        'I', 'M', 'F', 'W', 
-                        'P', 'S', 'T', 'C', 
-                        'Y', 'N', 'Q', 'D', 
-                        'E', 'K', 'R', 'H']
-    frames = line.split(':')
-
-    for a in frames:
-        if a[:-1].isdigit() & (str(a[-1]).upper() in amino_acids_list):
-            continue
-        else:
-            print('ERROR: invalid input format at line: {0}'.format(rownumber+2))
-            exit()
-
 def read_genotypes(filename: str) -> list:
     """Read the genotypes from the 'filename' having header."""
     genotypes = list()
@@ -26,16 +10,16 @@ def read_genotypes(filename: str) -> list:
         # Skip header line
         filehandle.readline()
 
-        for ind, line in enumerate(filehandle):
+        for line in filehandle:
             first = line.split('\t')[0]
             first = first.replace('\n', '')
             if first == '' or first == 'wt':
                 genotypes.append(('0Z',))
             else:
-                check_input(first, ind)
                 genotypes.append(tuple(first.split(':')))
     return genotypes
-    
+
+
 def get_delta(genotype1: str, genotype2: str) -> str:
     """Returns difference between 'genotype1' and 'genotype2' as
        alphabetically ordered list of mutations."""
@@ -178,3 +162,4 @@ def merge_sorted_files(sorted_file_names: list, max_open_files: int, output_file
             os.remove(sorted_file_name)
 
         return True
+>>>>>>> cdff19b1d1ede0423ed38bb56639954583f33275
