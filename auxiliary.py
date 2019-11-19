@@ -3,7 +3,7 @@ import math
 import operator
 
 def check_input(line: str, rownumber: int):
-    """Checking input rows for valid format"""
+    """Check input rows for valid format"""
     amino_acids_list = ['G', 'A', 'V', 'L', 
                         'I', 'M', 'F', 'W', 
                         'P', 'S', 'T', 'C', 
@@ -38,7 +38,7 @@ def read_genotypes(filename: str) -> list:
 
 
 def get_delta(genotype1: str, genotype2: str) -> str:
-    """Returns difference between 'genotype1' and 'genotype2' as
+    """Return difference between 'genotype1' and 'genotype2' as
        alphabetically ordered list of mutations."""
     s1 = set(genotype1)
     s2 = set(genotype2)
