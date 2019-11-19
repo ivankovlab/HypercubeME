@@ -33,7 +33,8 @@ def read_genotypes(filename: str) -> list:
                 genotypes.append(('0Z',))
             else:
                 check_input(first, ind)
-                genotypes.append(tuple(first.split(':')))
+                genotypes.append(first.split(':'), key = lambda x: int(x[:-1])))
+    
     return genotypes
 
 
