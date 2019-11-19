@@ -2,6 +2,15 @@ import os
 import math
 import operator
 
+def check_input(line: str, rownumber: int):
+    frames = line.split(':')
+    for a in frames:
+        if a[0].isdigit() & (not a[-1].isdigit()):
+            continue
+        else:
+            print('ERROR: invalid string format at line {0}'.format(rownumber + 2))
+            exit()
+
 def read_genotypes(filename: str) -> list:
     """Read the genotypes from the 'filename' having header."""
     genotypes = list()
@@ -10,13 +19,15 @@ def read_genotypes(filename: str) -> list:
         # Skip header line
         filehandle.readline()
 
-        for line in filehandle:
+        for ind,line in enumerate(filehandle):
             first = line.split('\t')[0]
             first = first.replace('\n', '')
             if first == '' or first == 'wt':
                 genotypes.append(('0Z',))
             else:
+                check_input(first, ind)
                 genotypes.append(tuple(first.split(':')))
+    exit()
     return genotypes
 
 
