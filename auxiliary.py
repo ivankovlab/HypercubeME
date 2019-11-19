@@ -3,12 +3,12 @@ import math
 import operator
 
 def check_input(line: str, rownumber: int):
-    '''Checking input rows for valid format'''
+    """Checking input rows for valid format"""
     amino_acids_list = ['G', 'A', 'V', 'L', 
                         'I', 'M', 'F', 'W', 
                         'P', 'S', 'T', 'C', 
                         'Y', 'N', 'Q', 'D', 
-                        'E', 'K', 'R', 'H']
+                        'E', 'K', 'R', 'H', 'Z']
     frames = line.split(':')
 
     for a in frames:
