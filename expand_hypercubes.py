@@ -5,9 +5,11 @@ import os
 import time
 
 def get_combinations(items):
+    """Get all variations of diagonal"""
     return (list(compress(items,mask)) for mask in product(*[[0,1]]*len(items)))
 
 def diagonal_to_dict(diagonal):
+    """Make dictionary from diagonal string"""
     diagonal_list = {}
     for mutation in diagonal:
         pos = mutation[:-1][1:]
@@ -17,6 +19,7 @@ def diagonal_to_dict(diagonal):
     return diagonal_list    
 
 def apply_mutations(diagonal, variations, genotype):
+    """Apply mutations to given genotype"""
     mutations_list = []
     for l in genotype.split(':'):
         if l[:-1] in variations:
@@ -39,7 +42,7 @@ if __name__ == '__main__':
     parser.add_argument('-of', '--output_file', help='the filename to write all variations', 
                         default='expanded_hypercubes_{0}.txt'.format(time.strftime("%Y-%m-%d-%H-%M", time.localtime())))
     args = parser.parse_args()
-
+    print('Expand hypercube ================')
     if args.hypercubes == '':
         print('ERROR: empty input filename')
         exit()
