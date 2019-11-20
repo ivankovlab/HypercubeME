@@ -36,9 +36,10 @@ def apply_mutations(diagonal, variations, genotype):
     
 
 if __name__ == '__main__':   
+    start_time = time.time()
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-hp', '--hypercubes', help='the filename with the list of measured genotypes')
+    parser.add_argument('-hc', '--hypercubes', help='the filename with the list of measured genotypes')
     parser.add_argument('-of', '--output_file', help='the filename to write all variations', 
                         default='expanded_hypercubes_{0}.txt'.format(time.strftime("%Y-%m-%d-%H-%M", time.localtime())))
     args = parser.parse_args()
@@ -78,4 +79,5 @@ if __name__ == '__main__':
             print(row, file=out_fh)
 
     print('Expanding complete')
-    print('Output file saved as ' + str(args.output_file))
+    print('Elapsed time: {0}'.format(time.time()-start_time))
+    print('Output file saved as {0}'.format(args.output_file))
