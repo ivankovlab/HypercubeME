@@ -15,8 +15,7 @@ def check_input(line: str, rownumber: int):
         if a[:-1].isdigit() & (str(a[-1]).upper() in amino_acids_list):
             continue
         else:
-            print('ERROR: invalid input format at line: {0}'.format(rownumber+2))
-            exit()
+            raise NameError('ERROR: invalid input format at line: {0}'.format(rownumber+2))
             
 def read_genotypes(filename: str) -> list:
     """Read the genotypes from the 'filename' having header."""

@@ -2,13 +2,13 @@ import os
 import time
 import argparse
 import multiprocessing as mp
-from shutil import copyfile
+from shutil import copyfile, rmtree
 import auxiliary as aux
 
 
 def divide_genotype_list(num_genotypes: int, num_parts: int) -> list:
     """
-    Divide 'num_genotypes' into 'num_parts' and return a list.
+    Divide 'num_genotypes' into 'num_parts' and return a list.nen 
 
     Parameters
     ----------
@@ -198,6 +198,7 @@ def process_file_with_hypercubes(hypercube_file_name: str, position: int, chunk_
 def process_dimension_one(cores: int, input_file: str, working_dir: str) -> list:
     """Generate all one-dimensional hypercubes from the list of genotypes"""
     genotypes = aux.read_genotypes(input_file)
+
     num_genotypes = len(genotypes)
     chunks_per_core = 10        # That is, every core has, on average, 10 chunks of work
     chunks = cores * chunks_per_core
@@ -300,6 +301,7 @@ if __name__ == '__main__':      # Multiprocessing does not work without this lin
             dimension = get_dimension(args.hypercubes)
         except FileNotFoundError:
             print('ERROR: File "{0}" not found. Please, specify the existing file'.format(args.hypercubes))
+            rmtree(args.folder, ignore_errors = True)
             exit(1)
         copyfile(args.hypercubes, args.folder + '/' + hypercube_file_name(dimension))
         dimension += 1
@@ -317,6 +319,11 @@ if __name__ == '__main__':      # Multiprocessing does not work without this lin
                 division = process_dimension_one(args.cores, input_file_name, args.folder)
             except FileNotFoundError:
                 print('ERROR: File "{0}" not found. Please, specify the existing file'.format(input_file_name))
+                rmtree(args.folder, ignore_errors = True)
+                exit(1)
+            except NameError as err:
+                print(str(err))
+                rmtree(args.folder, ignore_errors = True)
                 exit(1)
         else:
             input_file_name = args.folder + '/' + hypercube_file_name(dimension - 1)
