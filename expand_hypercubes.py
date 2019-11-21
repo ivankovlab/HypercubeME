@@ -1,6 +1,5 @@
 from itertools import compress, product
 import argparse
-import sys
 import os
 import time
 
@@ -40,9 +39,9 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-hc', '--hypercubes', help='the filename with the list of measured genotypes')
-    parser.add_argument('-of', '--output_file', help='the filename to write all variations', 
-                        default='expanded_hypercubes_{0}.txt'.format(time.strftime("%Y-%m-%d-%H-%M", time.localtime())))
+    parser.add_argument('-of', '--output_file', help='the filename to write all variations')
     args = parser.parse_args()
+
     print('Expand hypercube ================')
     if args.hypercubes == '':
         print('ERROR: empty input filename')
@@ -52,28 +51,41 @@ if __name__ == '__main__':
         print('ERROR: file {0} doesn\'t exist'.format(args.hypercubes))
         exit()
 
-    print('Start processing file: {0}'.format(args.hypercubes))
-    with open(args.hypercubes, 'r') as f:
-        f.readline()
-        rows = []
-        rows.append('diagonal \t first_genotype \t variations')
-        for line in f:
-            line = line.replace('\n','')
-            cols = line.split('\t')
-            
-            diagonal = cols[0]
-            diagonal_dict = diagonal_to_dict(diagonal.split(':'))
-            first_genotype = cols[1]
-            
-            genotypes = []
-            diagonal_variations = list(get_combinations(diagonal_dict))[1:]
-            
-            for variation in diagonal_variations:
-                m_genotype = apply_mutations(diagonal_dict, variation, first_genotype)
-                genotypes.append(m_genotype)
-            
-            rows.append(diagonal + '\t' + first_genotype + '\t' + ', '.join(genotypes))
+    if args.output_file is None:
+        args.output_file = '{0}_expanded.txt'.format(os.path.splitext(os.path.basename(args.hypercubes))[0])
 
+    if  os.path.isfile(args.output_file):
+        print('ERROR: file {0} already exists, please rename/rebase existing file or specify output file name with argument -of'.format(args.output_file))
+        exit()
+        
+    print('Start processing file: {0}'.format(args.hypercubes))
+
+    try:
+        with open(args.hypercubes, 'r') as f:
+            f.readline()
+            rows = []
+            rows.append('diagonal \t variations')
+            for line in f:
+                line = line.replace('\n','')
+                cols = line.split('\t')
+                
+                diagonal = cols[0]
+                diagonal_dict = diagonal_to_dict(diagonal.split(':'))
+                first_genotype = cols[1]
+                
+                genotypes = []
+                genotypes.append(first_genotype)
+                diagonal_variations = list(get_combinations(diagonal_dict))[1:]
+                
+                for variation in diagonal_variations:
+                    m_genotype = apply_mutations(diagonal_dict, variation, first_genotype)
+                    genotypes.append(m_genotype)
+                
+                rows.append(diagonal + '\t' + ', '.join(genotypes))
+    except:
+        print('ERROR: fail while reading file: please, be sure that the format of the input file is correct')
+        exit()
+        
     with open(args.output_file, 'w') as out_fh:
         for row in rows:
             print(row, file=out_fh)
