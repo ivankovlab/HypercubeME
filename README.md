@@ -39,7 +39,7 @@ To get full hypercube representation use expand_hypercubes.py utility.
 
 Arguments:
 - -hc *input_hypercubes_filename*, path to file with hypercubes in short format
-- -of (optional) *output_hypercubes_filename*, resulting file, default value: \i{input_hypercubes_filename}_expanded.txt
+- -of (optional) *output_hypercubes_filename*, resulting file, default value: *input_hypercubes_filename*_expanded.txt
 
 Take hypercubes in the short format from the file 'hypercubes/hypercubes_5.txt' and write them expanded into the default file 'hypercubes/hypercubes_5_expanded.txt':  
 
