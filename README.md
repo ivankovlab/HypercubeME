@@ -34,11 +34,11 @@ See the file 'test_complete_03.txt' for input example. Columns are tab-seplf enn
 ## Output format
 See the file 'test_expected/hypercubes_2.txt' for output example. Columns are tab-separated, first line is a header. The hypercube is written in a short format to save the disk space. To get full hypercube use expand_hypercube.py utility. The first column (example: 'A1Z:C0Z') is a diagonal of a hypercube containing mutations separated by semicolumn. Each mutation in the diagonal consists of initial variant, position, and the resulting variant, where wild-type is denoted as 'Z'. The remaining two columns contain the first (example: '0C:1A') and the last (example: '0Z', that is, wild-type) genotypes of the hypercube. So that, the mutations from the diagonal applied to the first genotype give you the last genotype: '0C:1A' + 'A1Z:C0Z' = '0Z'.
 
-## Full hypercubes representation
+## Full hypercube representation
 To get full hypercube representation use expand_hypercubes.py utility.
 
 Arguemnts:
-- -hp path to file with hypercubes in short format
+- -hc path to file with hypercubes in short format
 - -of output file name, default value: expanded_hypercudes+(current_time).txt
 
 Example:
