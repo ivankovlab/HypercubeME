@@ -29,7 +29,19 @@ Generate hypercubes of dimensionality two and higher from already calculated one
 `python3 HypercubeME.py -p test_expected/hypercube_1.txt`
 
 ## Input format
-See the file 'test_complete_03.txt' for input example. Columns are tab-separated, first line is a header which is ignored by HypercubeME. First column (example: '0C:2T') is a column-separated mutation list of a particular mutant variant. Each mutation consists of mutated position and the variant (amino acid residue or RNA/DNA base) where it is mutated. For wild-type HypercubeME uses '0Z', where 'Z' means wild-type variant (amino acid residue or RNA/DNA base); however, in the genotype file wild-type can also be denoted as empty string as in the file 'test_complete_03.txt'. All other columns are ignored by HypercubeME.
+See the file 'test_complete_03.txt' for input example. Columns are tab-seplf enn arated, first line is a header which is ignored by HypercubeME. First column (example: '0C:2T') is a column-separated mutation list of a particular mutant variant. Each mutation consists of mutated position and the variant (amino acid residue or RNA/DNA base) where it is mutated. For wild-type HypercubeME uses '0Z', where 'Z' means wild-type variant (amino acid residue or RNA/DNA base); however, in the genotype file wild-type can also be denoted as empty string as in the file 'test_complete_03.txt'. All other columns are ignored by HypercubeME.
 
 ## Output format
-See the file 'test_expected/hypercubes_2.txt' for output example. Columns are tab-separated, first line is a header. The hypercube is written in a short format to save the disk space. The first column (example: 'A1Z:C0Z') is a diagonal of a hypercube containing mutations separated by semicolumn. Each mutation in the diagonal consists of initial variant, position, and the resulting variant, where wild-type is denoted as 'Z'. The remaining two columns contain the first (example: '0C:1A') and the last (example: '0Z', that is, wild-type) genotypes of the hypercube. So that, the mutations from the diagonal applied to the first genotype give you the last genotype: '0C:1A' + 'A1Z:C0Z' = '0Z'.
+See the file 'test_expected/hypercubes_2.txt' for output example. Columns are tab-separated, first line is a header. The hypercube is written in a short format to save the disk space. To get full hypercube use expand_hypercube.py utility. The first column (example: 'A1Z:C0Z') is a diagonal of a hypercube containing mutations separated by semicolumn. Each mutation in the diagonal consists of initial variant, position, and the resulting variant, where wild-type is denoted as 'Z'. The remaining two columns contain the first (example: '0C:1A') and the last (example: '0Z', that is, wild-type) genotypes of the hypercube. So that, the mutations from the diagonal applied to the first genotype give you the last genotype: '0C:1A' + 'A1Z:C0Z' = '0Z'.
+
+## Full hypercubes representation
+To get full hypercube representation use expand_hypercubes.py utility.
+
+Arguemnts:
+- -hp path to file with hypercubes in short format
+- -of output file name, default value: expanded_hypercudes+(current_time).txt
+
+Example:
+`python expand_hypercubes.py -hp hypercubes/hypercubes_5.txt`
+
+
