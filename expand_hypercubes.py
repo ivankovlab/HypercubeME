@@ -77,8 +77,8 @@ if __name__ == '__main__':
                 genotypes.append(first_genotype)
                 diagonal_variations = list(get_combinations(diagonal_dict))[1:]
                 
-                for variation in diagonal_variations:
-                    m_genotype = apply_mutations(diagonal_dict, variation, first_genotype)
+                for variations in diagonal_variations:
+                    m_genotype = apply_mutations(diagonal_dict, variations, first_genotype)
                     genotypes.append(m_genotype)
                 
                 rows.append(diagonal + '\t' + ', '.join(genotypes))
