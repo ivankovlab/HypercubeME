@@ -55,7 +55,7 @@ if __name__ == '__main__':
         args.output_file = '{0}_expanded.txt'.format(os.path.splitext(os.path.basename(args.hypercubes))[0])
 
     if  os.path.isfile(args.output_file):
-        print('ERROR: file {0} already exists, please rename/rebase existing file or specify output file name with argument -of'.format(args.output_file))
+        print('ERROR: file {0} already exists, please rename/remove existing file or specify output file name with argument -of'.format(args.output_file))
         exit()
         
     print('Start processing file: {0}'.format(args.hypercubes))
