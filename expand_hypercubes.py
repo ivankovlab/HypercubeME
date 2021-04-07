@@ -38,15 +38,11 @@ if __name__ == '__main__':
     start_time = time.time()
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('-hc', '--hypercubes', help='the filename with the list of measured genotypes')
-    parser.add_argument('-of', '--output_file', help='the filename to write all variations')
+    parser.add_argument('-p', '--hypercubes', help='the filename with the list of identified hypercubes (output of "HypercubeME.py")', required=True)
+    parser.add_argument('-o', '--output_file', help='the filename to write extended hypercubes, "*_expanded.txt" by default')
     args = parser.parse_args()
 
-    print('Expand hypercube ================')
-    if args.hypercubes == '':
-        print('ERROR: empty input filename')
-        exit()
-
+    print('Expand hypercubes ================')
     if not os.path.isfile(args.hypercubes):
         print('ERROR: file {0} doesn\'t exist'.format(args.hypercubes))
         exit()
