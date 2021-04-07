@@ -1,4 +1,5 @@
 import unittest
+import os
 from utils import *
 
 
@@ -24,4 +25,12 @@ class TestHypercubes(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    if not os.path.exists('test_complete_03'):
+        print('Please, run:')
+        print()
+        print('python3 HypercubeME.py -g test_complete_03.txt -d test_complete_03')
+        print()
+        print('and run me again')
+        exit(1)
+
     unittest.main()
