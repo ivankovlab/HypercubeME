@@ -5,8 +5,8 @@ Generate all combinatorially complete datasets from the given genotype list
 Esteban LA, Lonishin LR, Bobrovskiy D, Leleytner G, Bogatyreva NS, Kondrashov FA, Ivankov DN.  
 HypercubeME: two hundred million combinatorially complete datasets from a single experiment.  
 Bioinformatics, 2019, 36:1960-1962.  
-doi: 10.1093/bioinformatics/btz841.  
-PMID: 31742320.
+doi: [10.1093/bioinformatics/btz841.](https://academic.oup.com/bioinformatics/article/36/6/1960/5631909)  
+PMID: [31742320.](https://pubmed.ncbi.nlm.nih.gov/31742320/)
 
 ## Usage
 Run in the command line following examples:
